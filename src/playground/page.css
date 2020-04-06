@@ -1,0 +1,24 @@
+.page-playground {
+  height: 100%;
+}
+
+.page-playground .main-editor,
+.page-playground .CodeMirror,
+.page-playground .CodeMirror-sizer,
+.page-playground .CodeMirror-sizer>div,
+.page-playground .CodeMirror-lines,
+.page-playground .CodeMirror-lines>div,
+.page-playground .CodeMirror-code {
+  height: 100%;
+}
+
+.page-playground #mountNode {
+  min-height: 100px;
+  overflow-y: auto;
+}
+
+.page-playground .ant-spin-nested-loading,
+.page-playground .ant-spin-container {
+  position: static;
+  height: 100%;
+}

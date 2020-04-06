@@ -1,0 +1,45 @@
+.page-gallery .main-container {
+  padding: 12px;
+  min-height: 100px;
+}
+
+@media (min-width: 576px) {
+  .page-gallery .main-container {
+    padding: 16px;
+  }
+}
+
+.page-gallery .ant-card-cover {
+  height: 160px;
+  background-color: #e6e6e6;
+}
+
+.page-gallery img {
+  display: block;
+  max-width: 100%;
+  height: 100%;
+}
+
+@media (max-width: 360px) {
+  .page-gallery .ant-col-xs-12 {
+    width: 100% !important;
+  }
+}
+
+@media (min-width: 640px) and (max-width: 899px) {
+  .page-gallery .ant-col-sm-12 {
+    width: 33.3333% !important;
+  }
+}
+
+@media (min-width: 900px) {
+  .page-gallery .ant-col-sm-12 {
+    width: 270px !important;
+  }
+}
+
+.page-gallery .ant-spin-nested-loading,
+.page-gallery .ant-spin-container {
+  position: static;
+  height: 100%;
+}
