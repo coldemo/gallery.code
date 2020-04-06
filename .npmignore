@@ -1,0 +1,12 @@
+.vscode
+public
+src
+.env
+.eslintignore
+.eslintrc.js
+.gitignore
+.npmignore
+.npmrc
+.prettierignore
+.prettierrc.js
+tsconfig.json
