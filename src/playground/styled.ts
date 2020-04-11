@@ -1,9 +1,24 @@
 import { Col, Row } from 'antd';
 import styled from 'styled-components';
+import media from 'styled-media-query';
+
+/**
+ * https://github.com/morajabi/styled-media-query
+ * export const defaultBreakpoints = {
+    huge: '1440px',
+    large: '1170px',
+    medium: '768px',
+    small: '450px',
+  };
+ */
 
 export let MainRow = styled(Row)`
   height: 100%;
   display: flex;
+
+  ${media.lessThan('medium')`
+    flex-direction: column;
+  `}
 `;
 
 export let MainCol = styled(Col)`

@@ -11,6 +11,7 @@ import { DragSizing } from 'react-drag-sizing';
 import Helmet from 'react-helmet';
 import { useHistory, useParams } from 'react-router';
 import styled from 'styled-components';
+import useMedia from 'use-media';
 import { GentleSpin } from '../components/GentleSpin';
 import { useApi } from '../hooks/useApi';
 import { useFormBinding } from '../hooks/useFormBinding';
@@ -127,6 +128,9 @@ export let Playground: React.FC = () => {
   //   [codeBinding.value]
   // );
 
+  // keeping sync'd with styled.ts (medium=768px)
+  let isGreaterThanMedium = useMedia({ minWidth: '768px' });
+
   return (
     <div className="page-playground">
       <Helmet>
@@ -141,12 +145,23 @@ export let Playground: React.FC = () => {
           </GentleSpin>
         </MainCol>
         <DragSizing
-          border="left"
-          style={{
-            minWidth: '20%',
-            maxWidth: '80%',
-            width: '50%',
-          }}
+          {...(isGreaterThanMedium
+            ? {
+                border: 'left',
+                style: {
+                  minWidth: '20%',
+                  maxWidth: '80%',
+                  width: '50%',
+                },
+              }
+            : {
+                border: 'top',
+                style: {
+                  minHeight: '20%',
+                  maxHeight: '80%',
+                  height: '50%',
+                },
+              })}
         >
           <MainCol>
             <CodeMirror
