@@ -1,5 +1,5 @@
 await loadScript('https://unpkg.com/react-redux')
-await loadScript('https://unpkg.com/genjijs')
+await loadScript('https://unpkg.com/genjijs-umd/dist/index.min.js')
 
 let { Provider, useSelector, useDispatch } = ReactRedux
 
@@ -107,11 +107,11 @@ let App = () => {
     <div style={{ padding: 20 }}>
       <div>
         <h1>Genji</h1>
-        <a target="_blank" href="https://github.com/huangruichang/genjijs">
+        <a target="_blank" href="https://github.com/kelekexiao123/genjijs">
           https://github.com/kelekexiao123/genjijs
         </a>
-        <br /><br />
       </div>
+      <br />
       <Provider store={store}>
         <GenjiApp />
       </Provider>
