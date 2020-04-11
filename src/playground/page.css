@@ -15,6 +15,7 @@
 .page-playground #mountNode {
   min-height: 100px;
   overflow-y: auto;
+  word-break: break-word;
 }
 
 .page-playground .ant-spin-nested-loading,
