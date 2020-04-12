@@ -3,17 +3,12 @@ await loadScript('https://unpkg.com/genjijs-umd/dist/index.min.js')
 
 let { Provider, useSelector, useDispatch } = ReactRedux
 
-const numberUnit = {
+let numberUnit = {
   namespace: 'number',
-  state: {
-    num: 0,
-    desc: {
-      num: 0
-    }
-  },
+  state: { num: 0, desc: { num: 0 } },
   actionCreators: {
     add({ type, payload }, { getState, pick, save }) {
-      const num = pick('num');
+      let num = pick('num');
       save({ num: num + payload });
     },
     async saveAsync(action, { getState, pick, save }) {
@@ -29,12 +24,9 @@ const numberUnit = {
     }
   }
 };
-const userUnit = {
+let userUnit = {
   namespace: 'user',
-  state: {
-    name: 'zhangsan',
-    num: 0
-  },
+  state: { name: 'zhangsan', num: 0 },
   actionCreators: {
     async saveOther(action, { getState, pick, save }) {
       return fetch('/mock')
@@ -49,13 +41,13 @@ const userUnit = {
   }
 };
 
-const genji = new Genji({ injectAsyncLoading: true, autoUpdateAsyncLoading: true });
-const unitTypes = {
+let genji = new Genji({ injectAsyncLoading: true, autoUpdateAsyncLoading: true });
+let unitTypes = {
   numberUnit: genji.model(numberUnit),
   userUnit: genji.model(userUnit),
 }
 genji.start();
-const store = genji.getStore()
+let store = genji.getStore()
 
 let GenjiApp = () => {
   let dispatch = useDispatch()
@@ -122,5 +114,5 @@ let App = () => {
 let sleep = (ms) => new Promise(r => setTimeout(r, ms))
 let fetch = async () => {
   await sleep(1000)
-  return { "message": "ojbk", "saveNum": 100 }
+  return { json: () => ({ "message": "ojbk", "saveNum": 100 }) }
 }
