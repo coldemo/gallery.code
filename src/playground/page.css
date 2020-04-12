@@ -3,12 +3,7 @@
 }
 
 .page-playground .main-editor,
-.page-playground .CodeMirror,
-.page-playground .CodeMirror-sizer,
-.page-playground .CodeMirror-sizer>div,
-.page-playground .CodeMirror-lines,
-.page-playground .CodeMirror-lines>div,
-.page-playground .CodeMirror-code {
+.page-playground .CodeMirror {
   height: 100%;
 }
 
