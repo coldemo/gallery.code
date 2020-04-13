@@ -1,4 +1,4 @@
-await loadScript('https://unpkg.com/react-editor')
+await loadJs('https://unpkg.com/react-editor')
 
 let { Editor } = ReactEditor
 

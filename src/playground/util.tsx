@@ -7,7 +7,7 @@ export let displayError = (err: Error) => {
   ReactDOM.render(<ErrorInfo>{err.stack}</ErrorInfo>, mountNode);
 };
 
-export let loadScript = (url: string) => {
+export let loadJs = (url: string) => {
   return new Promise((resolve, reject) => {
     let el = document.createElement('script');
     el.src = url;
@@ -23,7 +23,7 @@ export let loadScript = (url: string) => {
   });
 };
 
-export let loadStyle = (url: string) => {
+export let loadCss = (url: string) => {
   return new Promise((resolve, reject) => {
     let el = document.createElement('link');
     el.rel = 'stylesheet';

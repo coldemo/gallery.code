@@ -1,5 +1,5 @@
-await loadScript('https://unpkg.com/react-editor')
-await loadScript('https://unpkg.com/react-drag-sizing')
+await loadJs('https://unpkg.com/react-editor')
+await loadJs('https://unpkg.com/react-drag-sizing')
 
 let { Editor } = ReactEditor
 let { DragSizing } = ReactDragSizing

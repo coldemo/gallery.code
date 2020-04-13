@@ -21,7 +21,7 @@ import { useTrigger } from '../hooks/useTrigger';
 import { babelTransform } from './babelMaster';
 import './page.css';
 import { MainCol, MainRow, MountNode } from './styled';
-import { displayError, loadScript, loadStyle } from './util';
+import { displayError, loadJs, loadCss } from './util';
 
 Object.assign(window, {
   useFormBinding,
@@ -32,8 +32,8 @@ Object.assign(window, {
   React,
   ReactDOM,
   displayError,
-  loadScript,
-  loadStyle,
+  loadJs,
+  loadCss,
   setRendering: _.noop, // noop placeholder
 });
 
