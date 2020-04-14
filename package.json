@@ -9,6 +9,7 @@
     "codemirror": "^5.52.2",
     "immer": "^6.0.2",
     "lodash": "^4.17.15",
+    "moment": "^2.24.0",
     "react": "^16.8.6",
     "react-codemirror2": "^7.1.0",
     "react-dom": "^16.8.6",

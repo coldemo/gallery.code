@@ -12,6 +12,8 @@ import Helmet from 'react-helmet';
 import { useHistory, useParams } from 'react-router';
 import styled from 'styled-components';
 import useMedia from 'use-media';
+import immer from 'immer';
+import moment from 'moment';
 import { GentleSpin } from '../components/GentleSpin';
 import { useApi } from '../hooks/useApi';
 import { useFormBinding } from '../hooks/useFormBinding';
@@ -27,7 +29,10 @@ Object.assign(window, {
   useFormBinding,
   useInterval,
   useModel,
+  moment,
   styled,
+  immer,
+  _,
   Antd,
   React,
   ReactDOM,
@@ -139,7 +144,7 @@ export let Playground: React.FC = () => {
         <script>{preview}</script>
       </Helmet>
       <MainRow>
-        <MainCol style={{ flex: 1 }}>
+        <MainCol style={{ flex: 1, overflowX: 'auto' }}>
           <GentleSpin spinning={previewLoading}>
             <MountNode id="mountNode" />
           </GentleSpin>

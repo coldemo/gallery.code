@@ -5,7 +5,7 @@ let wrapCode = (code: string) => {
 (async () => {
   setRendering(true)
   try {
-    let { useRef, useMemo, useState, useEffect, useReducer, useContext, useCallback, useImperativeHandle } = React
+    let { useRef, useMemo, useState, useEffect, useLayoutEffect, useReducer, useContext, useCallback, useImperativeHandle } = React
     ;;${code};;
     ReactDOM.render(<App />, mountNode)
   } catch (err) {

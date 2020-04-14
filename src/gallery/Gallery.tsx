@@ -4,6 +4,7 @@ import { useHistory } from 'react-router';
 import { useApi } from '../hooks/useApi';
 import './page.css';
 import { handleImageError } from './util';
+import Helmet from 'react-helmet';
 
 export let Gallery: React.FC = () => {
   let history = useHistory();
@@ -28,6 +29,9 @@ export let Gallery: React.FC = () => {
 
   return (
     <div className="page-gallery">
+      <Helmet>
+        <title>Gallery</title>
+      </Helmet>
       <Spin spinning={loadingIndex}>
         <div className="main-container">
           <Row
