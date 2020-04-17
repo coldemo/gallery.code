@@ -13,6 +13,7 @@ import { useHistory, useParams } from 'react-router';
 import styled from 'styled-components';
 import useMedia from 'use-media';
 import immer from 'immer';
+import Axios from 'axios';
 import moment from 'moment';
 import { GentleSpin } from '../components/GentleSpin';
 import { useApi } from '../hooks/useApi';
@@ -23,7 +24,7 @@ import { useTrigger } from '../hooks/useTrigger';
 import { babelTransform } from './babelMaster';
 import './page.css';
 import { MainCol, MainRow, MountNode } from './styled';
-import { displayError, loadJs, loadCss } from './util';
+import { displayError, loadJs, loadCss, appendJs, appendCss } from './util';
 
 Object.assign(window, {
   useFormBinding,
@@ -33,12 +34,15 @@ Object.assign(window, {
   styled,
   immer,
   _,
+  axios: Axios,
   Antd,
   React,
   ReactDOM,
   displayError,
   loadJs,
   loadCss,
+  appendJs,
+  appendCss,
   setRendering: _.noop, // noop placeholder
 });
 

@@ -37,3 +37,33 @@ export let loadCss = (url: string) => {
     document.body.appendChild(el);
   });
 };
+
+export let appendJs = (code: string) => {
+  return new Promise((resolve, reject) => {
+    let el = document.createElement('script');
+    el.innerHTML = code;
+    el.onload = () => {
+      document.body.removeChild(el);
+      resolve();
+    };
+    el.onerror = e => {
+      document.body.removeChild(el);
+      reject(e);
+    };
+    document.body.appendChild(el);
+  });
+};
+
+export let appendCss = (code: string) => {
+  return new Promise((resolve, reject) => {
+    let el = document.createElement('style');
+    el.innerHTML = code;
+    el.onload = () => {
+      resolve();
+    };
+    el.onerror = e => {
+      reject(e);
+    };
+    document.body.appendChild(el);
+  });
+};
