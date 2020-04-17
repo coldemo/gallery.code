@@ -1,10 +1,37 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { ErrorInfo } from './styled';
+import Axios from 'axios';
 
 export let displayError = (err: Error) => {
   let mountNode = document.querySelector('#mountNode');
   ReactDOM.render(<ErrorInfo>{err.stack}</ErrorInfo>, mountNode);
+};
+
+export let loadJsForceUmd = async ({
+  url,
+  name,
+  deps = {},
+}: {
+  url: string;
+  name: string;
+  deps: { [key: string]: string };
+}) => {
+  let { data: code } = await Axios(url);
+  code = `
+    (() => {
+      let module = { exports: {} }
+      let require = k => {
+        ${Object.keys(deps)
+          .map(k => `if (k === ${k}) return ${deps[k]}`)
+          .join('\n')}
+        throw new Error(\`module '\${k}' not found\`)
+      }
+      ;;${code};;
+      window[${JSON.stringify(name)}] = module.exports
+    })()
+  `;
+  appendJs(code);
 };
 
 export let loadJs = (url: string) => {

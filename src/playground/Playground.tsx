@@ -24,7 +24,14 @@ import { useTrigger } from '../hooks/useTrigger';
 import { babelTransform } from './babelMaster';
 import './page.css';
 import { MainCol, MainRow, MountNode } from './styled';
-import { displayError, loadJs, loadCss, appendJs, appendCss } from './util';
+import {
+  displayError,
+  loadJsForceUmd,
+  loadJs,
+  loadCss,
+  appendJs,
+  appendCss,
+} from './util';
 
 Object.assign(window, {
   useFormBinding,
@@ -39,6 +46,7 @@ Object.assign(window, {
   React,
   ReactDOM,
   displayError,
+  loadJsForceUmd,
   loadJs,
   loadCss,
   appendJs,
