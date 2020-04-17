@@ -7,7 +7,18 @@ let wrapCode = (code: string) => {
   try {
     let { useRef, useMemo, useState, useEffect, useLayoutEffect, useReducer, useContext, useCallback, useImperativeHandle } = React
     ;;${code};;
-    ReactDOM.render(<App />, mountNode)
+
+    let isVueLike = _.isPlainObject(App)
+    if (isVueLike) {
+      if (!mountNode.children[0]) {
+        let innerNode = document.createElement('div')
+        mountNode.appendChild(innerNode)
+      }
+      let curr = mountNode.children[0]
+      new Vue(App).$mount(curr)
+    } else {
+      ReactDOM.render(<App />, mountNode)
+    }
   } catch (err) {
     displayError(err)
   } finally {
