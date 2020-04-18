@@ -80,3 +80,34 @@ export let appendCss = (code: string) => {
   el.innerHTML = code;
   window.mountNode.appendChild(el);
 };
+
+export let wrapCode = (code: string) => {
+  return `
+(async () => {
+  setRendering(true)
+  // mountNode.innerHTML = '' // can cause error in react
+  ReactDOM.unmountComponentAtNode(mountNode)
+  try {
+    let { useRef, useMemo, useState, useEffect, useLayoutEffect, useReducer, useContext, useCallback, useImperativeHandle } = React
+    ;;${code};;
+
+    let isVueLike = _.isPlainObject(App)
+    if (isVueLike) {
+      if (!mountNode.children[0]) {
+        let innerNode = document.createElement('div')
+        mountNode.appendChild(innerNode)
+      }
+      let curr = mountNode.children[0]
+      new Vue(App).$mount(curr)
+    } else {
+      ReactDOM.render(React.createElement(App), mountNode)
+    }
+  } catch (err) {
+    console.error(['displayError', err])
+    displayError(err)
+  } finally {
+    setRendering(false)
+  }
+})()
+  `.trim();
+};

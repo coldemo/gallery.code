@@ -40,7 +40,7 @@
     "typescript": "3.5.2"
   },
   "scripts": {
-    "deploy": "npm run build && gh-pages -d ./build -b master -r https://github.com/coldemo/coldemo.github.io",
+    "deploy": "npm run build && gh-pages -d ./build -b master -r git@github.com:coldemo/coldemo.github.io.git",
     "dev": "npm start",
     "start": "react-scripts start",
     "build": "react-scripts build",

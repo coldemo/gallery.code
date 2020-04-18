@@ -31,6 +31,7 @@ import {
   loadCss,
   appendJs,
   appendCss,
+  wrapCode,
 } from './util';
 
 Object.assign(window, {
@@ -124,18 +125,24 @@ export let Playground: React.FC = () => {
 
   Object.assign(window, { setRendering }); // without side-effect
 
-  let doPreview = useCallback(async (code: string) => {
-    if (!code) return;
-    setCompiling(true);
-    try {
-      let res = await babelTransform(code);
-      setPreview(res);
-    } catch (err) {
-      displayError(err);
-    } finally {
-      setCompiling(false);
-    }
-  }, []);
+  let doPreview = useCallback(
+    async (code: string) => {
+      if (!code) return;
+      setCompiling(true);
+      try {
+        let res = wrapCode(code);
+        if (file && file.endsWith('.jsx')) {
+          res = await babelTransform(res);
+        }
+        setPreview(res);
+      } catch (err) {
+        displayError(err);
+      } finally {
+        setCompiling(false);
+      }
+    },
+    [file]
+  );
 
   // let persistEditor = useCallback((code: string) => {
   //   localStorage.setItem(storeKeyCode, code);
