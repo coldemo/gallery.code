@@ -6,8 +6,9 @@ Visit: https://coldemo.github.io/
 
 - [ ] vscode tsconfig src/\* alias (being reverted by npm-run-dev)
 - [ ] antd4, safe js exec sandbox - see pureproxy
-- [ ] storage list, reset btn, sandboxNode, batch-screenshot, responsive-improve
 - [ ] lang ts/tsx/vue/py/rb/java
+- [ ] storage list, reset btn, responsive, screenshot
+- [ ] error-handling, sandboxNode
 - [x] gh-pages, lang js/jsx, react/vue, umd-hack
 - [x] code read from url, storybook cards
 - [x] web worker for babel transform

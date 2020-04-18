@@ -4,7 +4,8 @@ let wrapCode = (code: string) => {
   return `
 (async () => {
   setRendering(true)
-  mountNode.innerHTML = ''
+  // mountNode.innerHTML = '' // can cause error in react
+  ReactDOM.unmountComponentAtNode(mountNode)
   try {
     let { useRef, useMemo, useState, useEffect, useLayoutEffect, useReducer, useContext, useCallback, useImperativeHandle } = React
     ;;${code};;

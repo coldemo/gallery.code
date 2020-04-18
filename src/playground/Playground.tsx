@@ -70,9 +70,12 @@ export let Playground: React.FC = () => {
     response: respIndex,
     loading: loadingIndex,
   } = useApi<string>('GET', 'code/index.yml');
-  let { request: reqCode, response: respCode, loading: loadingCode } = useApi<
-    string
-  >('GET', 'code/:file');
+  let {
+    request: reqCode,
+    error: errReqCode,
+    response: respCode,
+    loading: loadingCode,
+  } = useApi<string>('GET', 'code/:file');
   let preloading = loadingIndex || loadingCode;
 
   useEffect(() => {
@@ -89,18 +92,30 @@ export let Playground: React.FC = () => {
     let txt = respIndex.data;
     let list = txt
       .split(/\n/)
+      .map(s => s.replace(/#.*/, '').trim())
       .filter(Boolean)
       .map(v => v.replace(/^-\s*/, ''));
     let defaults = list[0];
     // reqCode({ pathParams: { file: file || defaults } });
     history.push(`/playground/${file || defaults}`);
-  }, [file, history, reqCode, respIndex]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [file, respIndex]);
 
   useEffect(() => {
     if (respCode == null) return;
     codeBinding.controlled.onChange(null, null, respCode.data);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [respCode]);
+
+  useEffect(() => {
+    // if (errReqCode && String(errReqCode).includes('status code 404')) {
+    //   history.push('/'); // force redirect
+    // }
+    if (errReqCode) {
+      displayError(new Error(`${errReqCode.message} - ${file}`));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [errReqCode]);
 
   let [preview, setPreview] = useState('');
   let [compiling, setCompiling] = useState(false);

@@ -17,7 +17,13 @@ export let loadJsForceUmd = async ({
   name: string;
   deps: { [key: string]: string };
 }) => {
-  let { data: code } = await Axios(url);
+  let code = '';
+  try {
+    let { data } = await Axios(url);
+    code = data;
+  } catch (err) {
+    throw new Error(`loadJsForceUmd - ${err.message} - ${url}`);
+  }
   code = `
     (() => {
       let module = { exports: {} }
@@ -64,29 +70,13 @@ export let loadCss = (url: string) => {
 };
 
 export let appendJs = (code: string) => {
-  return new Promise((resolve, reject) => {
-    let el = document.createElement('script');
-    el.innerHTML = code;
-    el.onload = () => {
-      resolve();
-    };
-    el.onerror = e => {
-      reject(new Error(`appendJs onerror - ${code.slice(0, 100)}`));
-    };
-    window.mountNode.appendChild(el);
-  });
+  let el = document.createElement('script');
+  el.innerHTML = code;
+  window.mountNode.appendChild(el);
 };
 
 export let appendCss = (code: string) => {
-  return new Promise((resolve, reject) => {
-    let el = document.createElement('style');
-    el.innerHTML = code;
-    el.onload = () => {
-      resolve();
-    };
-    el.onerror = e => {
-      reject(new Error(`appendCss onerror - ${code.slice(0, 100)}`));
-    };
-    window.mountNode.appendChild(el);
-  });
+  let el = document.createElement('style');
+  el.innerHTML = code;
+  window.mountNode.appendChild(el);
 };

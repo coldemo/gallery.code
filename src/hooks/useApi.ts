@@ -15,6 +15,7 @@ type Request = (
 
 export interface UseApiObj<T = any, DT = T | null> {
   request: Request;
+  error: Error | null;
   response: AxiosResponse<T> | null;
   getData: () => DT;
   loading: boolean;
@@ -34,6 +35,7 @@ export let useApi = <T = any, DT = T>(
 ): UseApiObj<T, DT> => {
   let [response, setResponse] = useState<AxiosResponse<T> | null>(null);
   let [loading, setLoading] = useState(false);
+  let [error, setError] = useState(null);
 
   let request: Request = useCallback(
     async (patch = {}) => {
@@ -51,8 +53,10 @@ export let useApi = <T = any, DT = T>(
           ...patch,
         });
         setResponse(response);
+        setError(null);
       } catch (err) {
-        // @todo
+        setResponse(null);
+        setError(err);
       } finally {
         setLoading(false);
       }
@@ -64,5 +68,5 @@ export let useApi = <T = any, DT = T>(
     return parseData(response);
   }, [parseData, response]);
 
-  return { request, response, getData, loading };
+  return { request, error, response, getData, loading };
 };
