@@ -1,12 +1,14 @@
-# gallery.code
+# Coldemo Gallery & Playground
 
-Visit: https://fritx.github.io/gallery.code/
+Visit: https://coldemo.github.io/
 
 **Todo**
 
 - [ ] vscode tsconfig src/\* alias (being reverted by npm-run-dev)
 - [ ] antd4, safe js exec sandbox - see pureproxy
-- [ ] storage list, reset btn, gh deploy
+- [ ] storage list, reset btn, sandboxNode, batch-screenshot, responsive-improve
+- [ ] lang ts/tsx/vue/py/rb/java
+- [x] gh-pages, lang js/jsx, react/vue, umd-hack
 - [x] code read from url, storybook cards
 - [x] web worker for babel transform
 - [x] react-drag-sizing, gentleSpin

@@ -38,6 +38,18 @@
   }
 }
 
+@media (max-width: 450px) {
+  .ant-card-body {
+    padding: 12px;
+  }
+  .ant-card-meta-title {
+    font-size: 12px;
+  }
+  .page-gallery .ant-card-cover {
+    height: 120px;
+  }
+}
+
 .page-gallery .ant-spin-nested-loading,
 .page-gallery .ant-spin-container {
   position: static;
