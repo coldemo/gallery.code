@@ -4,6 +4,7 @@ let wrapCode = (code: string) => {
   return `
 (async () => {
   setRendering(true)
+  mountNode.innerHTML = ''
   try {
     let { useRef, useMemo, useState, useEffect, useLayoutEffect, useReducer, useContext, useCallback, useImperativeHandle } = React
     ;;${code};;
@@ -20,6 +21,7 @@ let wrapCode = (code: string) => {
       ReactDOM.render(<App />, mountNode)
     }
   } catch (err) {
+    console.error(['displayError', err])
     displayError(err)
   } finally {
     setRendering(false)
@@ -33,8 +35,8 @@ export let babelTransform = async (code: string): Promise<string> => {
     let fullCode = wrapCode(code);
 
     worker.onerror = e => {
-      console.log(['worker error', e]);
-      reject(e);
+      console.error(['worker onerror', e]);
+      reject(new Error(`worker onerror - ${code.slice(0, 100)}`));
     };
 
     worker.onmessage = e => {

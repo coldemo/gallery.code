@@ -39,14 +39,12 @@ export let loadJs = (url: string) => {
     let el = document.createElement('script');
     el.src = url;
     el.onload = () => {
-      document.body.removeChild(el);
       resolve();
     };
     el.onerror = e => {
-      document.body.removeChild(el);
-      reject(e);
+      reject(new Error(`loadJs onerror - ${url}`));
     };
-    document.body.appendChild(el);
+    window.mountNode.appendChild(el);
   });
 };
 
@@ -59,9 +57,9 @@ export let loadCss = (url: string) => {
       resolve();
     };
     el.onerror = e => {
-      reject(e);
+      reject(new Error(`loadCss onerror - ${url}`));
     };
-    document.body.appendChild(el);
+    window.mountNode.appendChild(el);
   });
 };
 
@@ -70,14 +68,12 @@ export let appendJs = (code: string) => {
     let el = document.createElement('script');
     el.innerHTML = code;
     el.onload = () => {
-      document.body.removeChild(el);
       resolve();
     };
     el.onerror = e => {
-      document.body.removeChild(el);
-      reject(e);
+      reject(new Error(`appendJs onerror - ${code.slice(0, 100)}`));
     };
-    document.body.appendChild(el);
+    window.mountNode.appendChild(el);
   });
 };
 
@@ -89,8 +85,8 @@ export let appendCss = (code: string) => {
       resolve();
     };
     el.onerror = e => {
-      reject(e);
+      reject(new Error(`appendCss onerror - ${code.slice(0, 100)}`));
     };
-    document.body.appendChild(el);
+    window.mountNode.appendChild(el);
   });
 };
