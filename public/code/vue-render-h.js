@@ -1,5 +1,5 @@
-// await loadJs('https://unpkg.com/vue') // sometimes broken
-await loadJs('https://cdn.jsdelivr.net/npm/vue@2.6.11/dist/vue.min.js')
+// await loadJs('https://cdn.jsdelivr.net/npm/vue@2.6.11/dist/vue.min.js')
+await loadJs('https://unpkg.com/vue@2.6.11/dist/vue.min.js')
 
 appendCss(`
 .container { padding: 20px }

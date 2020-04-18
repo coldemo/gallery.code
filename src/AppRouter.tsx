@@ -1,13 +1,23 @@
 import React from 'react';
-import { HashRouter as Router, Route } from 'react-router-dom';
+import {
+  HashRouter as Router,
+  Route,
+  Switch,
+  Redirect,
+} from 'react-router-dom';
 import { Gallery } from './gallery';
 import { Playground } from './playground';
 
 function AppRouter() {
   return (
     <Router>
-      <Route path="/" exact component={Gallery} />
-      <Route path="/playground/:file?" component={Playground} />
+      <Switch>
+        <Route path="/" exact component={Gallery} />
+        <Route path="/playground/:file" component={Playground} />
+        <Route path="*">
+          <Redirect to="/" />
+        </Route>
+      </Switch>
     </Router>
   );
 }

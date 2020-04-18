@@ -1,5 +1,5 @@
-// await loadJs('https://unpkg.com/vue') // sometimes broken
-await loadJs('https://cdn.jsdelivr.net/npm/vue@2.6.11/dist/vue.min.js')
+// await loadJs('https://cdn.jsdelivr.net/npm/vue@2.6.11/dist/vue.min.js')
+await loadJs('https://unpkg.com/vue@2.6.11/dist/vue.min.js')
 
 // await loadJs('https://unpkg.com/vue-at')
 await loadJsForceUmd({
@@ -10,7 +10,7 @@ await loadJsForceUmd({
 
 appendCss(`
 .container { padding: 20px }
-.editor { height:120px; border:solid 1px gray; white-space: pre-wrap }
+.editor { padding:4px 8px; height:120px; border:solid 1px gray; white-space:pre-wrap }
 `)
 
 let App = {
