@@ -10,7 +10,7 @@ await loadJsForceUmd({
 
 appendCss(`
 .container { padding: 20px }
-.editor { padding:4px 8px; height:120px; border:solid 1px gray; white-space:pre-wrap }
+.editor { margin-top:20px; padding:4px 8px; height:120px; border:solid 1px gray; white-space:pre-wrap }
 `)
 
 let App = {
@@ -18,11 +18,9 @@ let App = {
   template: `
     <div class="container">
       <h1>Vue At</h1>
-      <div style="margin-top:20px">
-        <at :members="members" v-model="input">
-          <div class="editor" contenteditable></div>
-        </at>
-      </div>
+      <at :members="members" v-model="input">
+        <div class="editor" contenteditable></div>
+      </at>
     </div>
   `,
   data() {

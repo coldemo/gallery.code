@@ -7,10 +7,9 @@
   height: 100%;
 }
 
-.page-playground #mountNode {
-  min-height: 100px;
-  overflow-y: auto;
-  word-break: break-word;
+.page-playground #assetsNode,
+.page-playground #assetsNodeOutdated {
+  display: none;
 }
 
 .page-playground .ant-spin-nested-loading,

@@ -27,6 +27,9 @@ export let MainCol = styled(Col)`
 
 export let MountNode = styled.div`
   height: 100%;
+  min-height: 100px;
+  overflow-y: auto;
+  word-break: break-word;
 `;
 
 export let ErrorInfo = styled.pre`

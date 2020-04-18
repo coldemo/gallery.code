@@ -20,11 +20,11 @@
   height: 100%;
 }
 
-@media (max-width: 360px) {
+/* @media (max-width: 360px) {
   .page-gallery .ant-col-xs-12 {
     width: 100% !important;
   }
-}
+} */
 
 @media (min-width: 640px) and (max-width: 899px) {
   .page-gallery .ant-col-sm-12 {
@@ -42,9 +42,11 @@
   .ant-card-body {
     padding: 12px;
   }
+
   .ant-card-meta-title {
     font-size: 12px;
   }
+
   .page-gallery .ant-card-cover {
     height: 120px;
   }

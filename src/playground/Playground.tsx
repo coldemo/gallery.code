@@ -181,6 +181,7 @@ export let Playground: React.FC = () => {
         <MainCol style={{ flex: 1, overflowX: 'auto' }}>
           <GentleSpin spinning={previewLoading}>
             <MountNode id="mountNode" />
+            <div id="assetsNode" />
           </GentleSpin>
         </MainCol>
         <DragSizing

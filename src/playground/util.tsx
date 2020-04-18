@@ -50,7 +50,7 @@ export let loadJs = (url: string) => {
     el.onerror = e => {
       reject(new Error(`loadJs onerror - ${url}`));
     };
-    window.mountNode.appendChild(el);
+    window.assetsNode.appendChild(el);
   });
 };
 
@@ -65,26 +65,33 @@ export let loadCss = (url: string) => {
     el.onerror = e => {
       reject(new Error(`loadCss onerror - ${url}`));
     };
-    window.mountNode.appendChild(el);
+    window.assetsNode.appendChild(el);
   });
 };
 
 export let appendJs = (code: string) => {
   let el = document.createElement('script');
   el.innerHTML = code;
-  window.mountNode.appendChild(el);
+  window.assetsNode.appendChild(el);
 };
 
 export let appendCss = (code: string) => {
   let el = document.createElement('style');
   el.innerHTML = code;
-  window.mountNode.appendChild(el);
+  window.assetsNode.appendChild(el);
 };
 
 export let wrapCode = (code: string) => {
   return `
 (async () => {
   setRendering(true)
+
+  let a0 = assetsNode
+  a0.id = 'assetsNodeOutdated'
+  let a1 = document.createElement('div')
+  a1.id = 'assetsNode'
+  a0.parentNode.appendChild(a1)
+
   // mountNode.innerHTML = '' // can cause error in react
   ReactDOM.unmountComponentAtNode(mountNode)
   try {
@@ -102,6 +109,7 @@ export let wrapCode = (code: string) => {
     } else {
       ReactDOM.render(React.createElement(App), mountNode)
     }
+    a0.parentNode.removeChild(a0)
   } catch (err) {
     console.error(['displayError', err])
     displayError(err)
