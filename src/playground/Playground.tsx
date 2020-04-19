@@ -131,9 +131,8 @@ export let Playground: React.FC = () => {
       setCompiling(true);
       try {
         let res = wrapCode(code);
-        if (file && file.endsWith('.jsx')) {
-          res = await babelTransform(res);
-        }
+        let hasJsx = file && ['.jsx', '.tsx'].some(ext => file.endsWith(ext));
+        if (hasJsx) res = await babelTransform(res);
         setPreview(res);
       } catch (err) {
         displayError(err);
@@ -158,6 +157,10 @@ export let Playground: React.FC = () => {
     doPreview,
     [codeBinding.value]
   );
+  window.triggerPreview = () => {
+    // doPreview(codeBinding.value);
+    doPreview(codeBinding.value + `\n\n/* ${new Date()} */`);
+  };
 
   // useTrigger(
   //   {
@@ -169,6 +172,18 @@ export let Playground: React.FC = () => {
 
   // keeping sync'd with styled.ts (medium=768px)
   let isGreaterThanMedium = useMedia({ minWidth: '768px' });
+
+  let handleSizingUpdate = useCallback(() => {
+    let event = new Event('resize');
+    window.mountNode.dispatchEvent(event);
+  }, []);
+
+  useEffect(() => {
+    window.addEventListener('resize', handleSizingUpdate);
+    return () => {
+      window.removeEventListener('resize', handleSizingUpdate);
+    };
+  }, [handleSizingUpdate]);
 
   return (
     <div className="page-playground">
@@ -185,6 +200,7 @@ export let Playground: React.FC = () => {
           </GentleSpin>
         </MainCol>
         <DragSizing
+          onUpdate={handleSizingUpdate}
           {...(isGreaterThanMedium
             ? {
                 border: 'left',
