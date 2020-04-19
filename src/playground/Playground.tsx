@@ -188,7 +188,7 @@ export let Playground: React.FC = () => {
   return (
     <div className="page-playground">
       <Helmet>
-        <title>Playground</title>
+        <title>Playground{file ? ` - ${file}` : ''}</title>
         <style>{`html { overflow: hidden } #root { height: 100% }`}</style>
         <script>{preview}</script>
       </Helmet>
