@@ -29,7 +29,7 @@ export let loadJsForceUmd = async ({
       let module = { exports: {} }
       let require = k => {
         ${Object.keys(deps)
-          .map(k => `if (k === ${k}) return ${deps[k]}`)
+          .map(k => `if (k === ${JSON.stringify(k)}) return ${deps[k]}`)
           .join('\n')}
         throw new Error(\`module '\${k}' not found\`)
       }

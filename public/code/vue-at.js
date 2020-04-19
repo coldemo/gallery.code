@@ -5,7 +5,6 @@ await loadJs('https://unpkg.com/vue@2.6.11/dist/vue.min.js')
 await loadJsForceUmd({
   url: 'https://unpkg.com/vue-at@2.5.0-beta.2/dist/vue-at.js',
   name: 'VueAt',
-  deps: { vue: Vue },
 })
 
 appendCss(`
@@ -18,6 +17,9 @@ let App = {
   template: `
     <div class="container">
       <h1>Vue At</h1>
+      <a target="_blank" href="https://github.com/fritx/vue-at">
+        https://github.com/fritx/vue-at
+      </a>
       <at :members="members" v-model="input">
         <div class="editor" contenteditable></div>
       </at>
