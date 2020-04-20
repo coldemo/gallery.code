@@ -40,7 +40,10 @@ export let loadJsForceUmd = async ({
   appendJs(code);
 };
 
-export let loadJs = (url: string) => {
+export let loadJs = (url: string | string[]): Promise<void> => {
+  if (Array.isArray(url)) {
+    return Promise.all(url.map(loadJs)).then(() => undefined);
+  }
   return new Promise((resolve, reject) => {
     let el = document.createElement('script');
     el.src = url;
@@ -54,7 +57,10 @@ export let loadJs = (url: string) => {
   });
 };
 
-export let loadCss = (url: string) => {
+export let loadCss = (url: string | string[]): Promise<void> => {
+  if (Array.isArray(url)) {
+    return Promise.all(url.map(loadCss)).then(() => undefined);
+  }
   return new Promise((resolve, reject) => {
     let el = document.createElement('link');
     el.rel = 'stylesheet';

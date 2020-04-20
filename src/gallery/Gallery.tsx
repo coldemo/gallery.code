@@ -52,8 +52,12 @@ export let Gallery: React.FC = () => {
                         onError={handleImageError}
                       />
                     }
-                    onClick={() => {
-                      history.push(`/playground/${id}`);
+                    onClick={e => {
+                      if (e.metaKey) {
+                        window.open(`/#/playground/${id}`);
+                      } else {
+                        history.push(`/playground/${id}`);
+                      }
                     }}
                   >
                     <Card.Meta

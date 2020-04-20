@@ -1,5 +1,7 @@
-await loadJs('https://unpkg.com/react-redux')
-await loadJs('https://unpkg.com/genjijs-umd/dist/index.min.js')
+await loadJs([
+  'https://unpkg.com/react-redux@7.2.0/dist/react-redux.js',
+  'https://unpkg.com/genjijs-umd@0.3.0/dist/index.min.js',
+])
 
 let { Provider, useSelector, useDispatch } = ReactRedux
 

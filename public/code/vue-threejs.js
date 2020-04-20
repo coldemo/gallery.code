@@ -1,8 +1,8 @@
-// await loadJs('https://cdn.jsdelivr.net/npm/vue@2.6.11/dist/vue.min.js')
-await loadJs('https://unpkg.com/vue@2.6.11/dist/vue.min.js')
-
-// await loadJs('https://unpkg.com/three@0.81.2/build/three.min.js')
-await loadJs('https://unpkg.com/three@0.115.0/build/three.min.js')
+await loadJs([
+  'https://unpkg.com/vue@2.6.11/dist/vue.min.js',
+  // 'https://unpkg.com/three@0.81.2/build/three.min.js',
+  'https://unpkg.com/three@0.115.0/build/three.min.js',
+])
 
 // await loadJs('https://unpkg.com/vue-threejs@0.2.0-alpha.1/lib/VueThreejs.umd.min.js')
 await loadJs('https://unpkg.com/vue-threejs@0.2.0-alpha.1/lib/VueThreejs.umd.js')

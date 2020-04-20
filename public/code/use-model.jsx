@@ -1,5 +1,7 @@
-await loadJs('https://unpkg.com/immer')
-await loadJs('https://unpkg.com/react-editor')
+await loadJs([
+  'https://unpkg.com/immer@6.0.3/dist/immer.umd.production.min.js',
+  'https://unpkg.com/react-editor@2.0.0-alpha.5/dist/index.js',
+])
 
 let { produce } = immer
 let { Button } = Antd
