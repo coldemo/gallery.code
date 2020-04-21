@@ -100,20 +100,24 @@ export let wrapCode = (code: string) => {
 
   // mountNode.innerHTML = '' // can cause error in react
   ReactDOM.unmountComponentAtNode(mountNode)
+
   try {
     let { useRef, useMemo, useState, useEffect, useLayoutEffect, useReducer, useContext, useCallback, useImperativeHandle } = React
+
     ;;${code};;
 
-    let isVueLike = _.isPlainObject(App)
-    if (isVueLike) {
-      if (!mountNode.children[0]) {
-        let innerNode = document.createElement('div')
-        mountNode.appendChild(innerNode)
-      }
-      let curr = mountNode.children[0]
+    if (typeof App !== 'undefined') {
+      let isVueLike = _.isPlainObject(App)
+      if (isVueLike) {
+        if (!mountNode.children[0]) {
+          let innerNode = document.createElement('div')
+          mountNode.appendChild(innerNode)
+        }
+        let curr = mountNode.children[0]
       new Vue(App).$mount(curr)
-    } else {
-      ReactDOM.render(React.createElement(App), mountNode)
+      } else {
+        ReactDOM.render(React.createElement(App), mountNode)
+      }
     }
     a0.parentNode.removeChild(a0)
   } catch (err) {
