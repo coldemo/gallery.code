@@ -8,7 +8,8 @@ Visit: https://coldemo.github.io/
 - [ ] antd4, safe js exec sandbox - see pureproxy
 - [ ] lang ts/tsx/vue/py/rb/java
 - [ ] storage list, reset btn, responsive, screenshot
-- [ ] error-handling, assetsNode
+- [ ] faked location/window, vue-jsx
+- [x] error-handling, assetsNode, load-parallel, crank-jsx
 - [x] gh-pages, lang js/jsx, react/vue, umd-hack
 - [x] code read from url, storybook cards
 - [x] web worker for babel transform
