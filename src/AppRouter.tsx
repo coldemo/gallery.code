@@ -14,6 +14,7 @@ function AppRouter() {
       <Switch>
         <Route path="/" exact component={Gallery} />
         <Route path="/playground/:file?" component={Playground} />
+        <Route path="/playground/:file/**" component={Playground} />
         <Route path="*">
           <Redirect to="/" />
         </Route>
