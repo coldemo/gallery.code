@@ -1,4 +1,3 @@
-- vue-render-jsx.jsx
 - crank-todomvc.jsx
 - crank-async-generator.jsx
 - vue-threejs-movement.js
@@ -9,6 +8,7 @@
 - vue-threejs.js
 - react-at.jsx
 - vue-at.js
+- vue-render-jsx.jsx
 - vue-render-h.js
 - vue-string-template.js
 - line-chart.jsx
