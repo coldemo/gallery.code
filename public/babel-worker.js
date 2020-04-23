@@ -1,17 +1,19 @@
 /* global Babel, importScripts */
-// importScripts('./babel.min.js')
 // importScripts('https://unpkg.com/@babel/standalone');
-importScripts('https://unpkg.com/@babel/standalone@7.9.4/babel.js')
+// importScripts('https://unpkg.com/@babel/standalone@7.9.4/babel.js');
+importScripts('./babel.min.js');
 
 let Queue = {
   skipMiddle: true,
   tasks: [],
   async exec(code) {
     try {
+      let isVueJsx = /render\s*\(\s*h\s*\)\s*\{/.test(code);
+      let plugins = isVueJsx
+        ? ['syntax-jsx', 'transform-vue-jsx']
+        : ['transform-react-jsx'];
       /* cpu-intensive start */
-      let res = Babel.transform(code, {
-        plugins: ['transform-react-jsx'],
-      });
+      let res = Babel.transform(code, { plugins });
       /* cpu-intensive end */
       postMessage({ data: res.code });
     } catch (err) {
