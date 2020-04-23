@@ -253,7 +253,12 @@ function save(todos) {
 }
 
 function* App() {
-  let todos = [];
+  // let todos = [];
+  let todos = [
+    { id: 1, title: 'sports', completed: true },
+    { id: 2, title: 'learn crank', completed: false },
+    { id: 3, title: 'get to work', completed: false },
+  ];
   let nextTodoId = 0;
   try {
     const storedTodos = JSON.parse(localStorage.getItem(STORAGE_KEY));
@@ -321,8 +326,10 @@ function* App() {
         break;
       }
       default: {
-        filter = "";
-        window.location.hash = `${prefix}/`;
+        if (window.location.hash.startsWith(`${prefix}/`)) {
+          filter = "";
+          window.location.hash = `${prefix}/`;
+        }
       }
     }
 

@@ -8,7 +8,7 @@ const {createElement, renderer} = Crank;
 
 appendCss(`
 #mountNode { padding: 20px }
-`)
+`);
 
 // https://github.com/bikeshaving/crank/tree/master/examples/async-generator
 const mount = document.getElementById("mountNode");
@@ -21,7 +21,7 @@ async function* List(
   for await ({elems} of this) {
     i++;
     if (i % 5 === 0) {
-      yield <div>Loading {elems.length} items...</div>;
+      yield (<div>Loading {elems.length} items...</div>);
       await new Promise((resolve) => setTimeout(resolve, 4000));
     }
     yield (
