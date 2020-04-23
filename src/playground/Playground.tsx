@@ -132,7 +132,8 @@ export let Playground: React.FC = () => {
       try {
         let res = wrapCode(code);
         let hasJsx = file && ['.jsx', '.tsx'].some(ext => file.endsWith(ext));
-        if (hasJsx) res = await babelTransform(res);
+        let hasTs = file && ['.ts', '.tsx'].some(ext => file.endsWith(ext));
+        if (hasJsx || hasTs) res = await babelTransform(res, file);
         setPreview(res);
       } catch (err) {
         displayError(err);

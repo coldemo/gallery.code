@@ -6,16 +6,33 @@ importScripts('./babel.min.js');
 let Queue = {
   skipMiddle: true,
   tasks: [],
-  async exec(code) {
+  async exec({ code, file }) {
     try {
-      let isVueJsx = /render\s*\(\s*h\s*\)\s*\{/.test(code);
-      let plugins = isVueJsx
-        ? ['syntax-jsx', 'transform-vue-jsx']
-        : ['transform-react-jsx'];
-      /* cpu-intensive start */
-      let res = Babel.transform(code, { plugins });
-      /* cpu-intensive end */
-      postMessage({ data: res.code });
+      let plugins = [];
+      let hasJsx = file && ['.jsx', '.tsx'].some(ext => file.endsWith(ext));
+      let hasTs = file && ['.ts', '.tsx'].some(ext => file.endsWith(ext));
+      if (hasJsx) {
+        let isVueJsx = /render\s*\(\s*h\s*\)\s*\{/.test(code);
+        if (isVueJsx) {
+          plugins.push('syntax-jsx', 'transform-vue-jsx');
+        } else {
+          plugins.push('transform-react-jsx');
+        }
+      }
+      if (hasTs) {
+        if (hasJsx) {
+          plugins.push(['transform-typescript', { isTSX: true }]);
+        } else {
+          plugins.push('transform-typescript');
+        }
+      }
+      if (plugins.length) {
+        /* cpu-intensive start */
+        let res = Babel.transform(code, { plugins });
+        /* cpu-intensive end */
+        code = res.code;
+      }
+      postMessage({ data: code });
     } catch (err) {
       // postMessage({ error: err ? err.stack : String(err) })
       postMessage({ error: err });

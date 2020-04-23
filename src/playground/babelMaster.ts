@@ -1,6 +1,9 @@
 let worker = new Worker('./babel-worker.js');
 
-export let babelTransform = async (code: string): Promise<string> => {
+export let babelTransform = async (
+  code: string,
+  file: string
+): Promise<string> => {
   return new Promise((resolve, reject) => {
     worker.onerror = e => {
       console.error(['worker onerror', e]);
@@ -15,6 +18,6 @@ export let babelTransform = async (code: string): Promise<string> => {
         resolve(res.data as string);
       }
     };
-    worker.postMessage(code);
+    worker.postMessage({ code, file });
   });
 };
