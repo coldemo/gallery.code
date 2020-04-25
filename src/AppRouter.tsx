@@ -1,12 +1,20 @@
+import loadable from '@loadable/component';
 import React from 'react';
 import {
   HashRouter as Router,
+  Redirect,
   Route,
   Switch,
-  Redirect,
 } from 'react-router-dom';
-import { Gallery } from './gallery';
-import { Playground } from './playground';
+
+// react-router code-splitting
+// https://reacttraining.com/react-router/web/guides/code-splitting
+let Gallery = loadable(async () => {
+  return (await import('./gallery')).Gallery;
+});
+let Playground = loadable(async () => {
+  return (await import('./playground')).Playground;
+});
 
 function AppRouter() {
   return (
