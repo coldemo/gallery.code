@@ -6,10 +6,12 @@ Visit: https://coldemo.github.io/
 
 - [ ] vscode tsconfig src/\* alias (being reverted by npm-run-dev)
 - [ ] antd4, safe js exec sandbox - see pureproxy
-- [ ] lang ts/tsx/vue/py/rb/java
-- [ ] storage list, reset btn, responsive, screenshot
-- [ ] faked location/window, vue-jsx
-- [x] error-handling, assetsNode, load-parallel, crank-jsx
+- [ ] storage list, responsive, screenshot, code-splitting
+- [ ] faked location/window, cookie/storage partition
+- [ ] btn-back/reset/export/upload/fullscreen
+- [ ] lang vue/rb/java, mjs-import
+- [x] crank-jsx, vue-jsx, ts/tsx, py
+- [x] error-handling, assetsNode, load-parallel
 - [x] gh-pages, lang js/jsx, react/vue, umd-hack
 - [x] code read from url, storybook cards
 - [x] web worker for babel transform

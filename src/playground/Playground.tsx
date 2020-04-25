@@ -2,6 +2,7 @@ import * as Antd from 'antd';
 import 'codemirror/lib/codemirror.css';
 // import 'codemirror/mode/javascript/javascript';
 import 'codemirror/mode/jsx/jsx';
+import 'codemirror/mode/python/python';
 import 'codemirror/theme/material.css';
 import _ from 'lodash';
 import React, { useCallback, useEffect, useState } from 'react';
@@ -21,7 +22,7 @@ import { useFormBinding } from '../hooks/useFormBinding';
 import { useInterval } from '../hooks/useInterval';
 import { useModel } from '../hooks/useModel';
 import { useTrigger } from '../hooks/useTrigger';
-import { babelTransform } from './babelMaster';
+import { codeTransform } from './codeTransform';
 import './page.css';
 import { MainCol, MainRow, MountNode } from './styled';
 import {
@@ -31,7 +32,6 @@ import {
   loadCss,
   appendJs,
   appendCss,
-  wrapCode,
 } from './util';
 
 Object.assign(window, {
@@ -60,6 +60,8 @@ Object.assign(window, {
 export let Playground: React.FC = () => {
   let history = useHistory();
   let { file } = useParams() as { file: string };
+  let isPy = file.endsWith('.py');
+
   // let initialCode = useMemo(() => {
   //   return localStorage.getItem(storeKeyCode) || _initialCode;
   // }, []);
@@ -130,10 +132,7 @@ export let Playground: React.FC = () => {
       if (!code) return;
       setCompiling(true);
       try {
-        let res = wrapCode(code);
-        let hasJsx = file && ['.jsx', '.tsx'].some(ext => file.endsWith(ext));
-        let hasTs = file && ['.ts', '.tsx'].some(ext => file.endsWith(ext));
-        if (hasJsx || hasTs) res = await babelTransform(res, file);
+        let res = await codeTransform(code, file);
         setPreview(res);
       } catch (err) {
         displayError(err);
@@ -224,7 +223,7 @@ export let Playground: React.FC = () => {
             <CodeMirror
               className="main-editor"
               options={{
-                mode: 'text/typescript-jsx',
+                mode: isPy ? 'python' : 'text/typescript-jsx',
                 theme: 'material',
                 lineNumbers: true,
               }}
