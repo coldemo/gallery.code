@@ -26,8 +26,8 @@ export let wrapPy = (code: string) => {
   ReactDOM.unmountComponentAtNode(mountNode)
 
   try {
-    await loadJs('http://www.skulpt.org/js/skulpt.min.js')
-    await loadJs('http://www.skulpt.org/js/skulpt-stdlib.js')
+    await loadJs('https://www.skulpt.org/js/skulpt.min.js')
+    await loadJs('https://www.skulpt.org/js/skulpt-stdlib.js')
 
     appendCss(\`
     #py-container { padding: 20px }
