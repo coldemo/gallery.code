@@ -90,8 +90,8 @@ export let wrapJs = (code: string) => {
   a1.id = 'assetsNode'
   a0.parentNode.appendChild(a1)
 
-  // mountNode.innerHTML = '' // can cause error in react
   ReactDOM.unmountComponentAtNode(mountNode)
+  mountNode.innerHTML = '' // put after, otherwise can cause error in react
 
   try {
     let { useRef, useMemo, useState, useEffect, useLayoutEffect, useReducer, useContext, useCallback, useImperativeHandle } = React

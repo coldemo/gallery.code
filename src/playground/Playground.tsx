@@ -1,10 +1,13 @@
 import * as Antd from 'antd';
+import Axios from 'axios';
 import 'codemirror/lib/codemirror.css';
 // import 'codemirror/mode/javascript/javascript';
 import 'codemirror/mode/jsx/jsx';
 import 'codemirror/mode/python/python';
 import 'codemirror/theme/material.css';
+import immer from 'immer';
 import _ from 'lodash';
+import moment from 'moment';
 import React, { useCallback, useEffect, useState } from 'react';
 import { Controlled as CodeMirror } from 'react-codemirror2';
 import ReactDOM from 'react-dom';
@@ -13,9 +16,6 @@ import Helmet from 'react-helmet';
 import { useHistory, useParams } from 'react-router';
 import styled from 'styled-components';
 import useMedia from 'use-media';
-import immer from 'immer';
-import Axios from 'axios';
-import moment from 'moment';
 import { GentleSpin } from '../components/GentleSpin';
 import { useApi } from '../hooks/useApi';
 import { useFormBinding } from '../hooks/useFormBinding';
@@ -26,12 +26,13 @@ import { codeTransform } from './codeTransform';
 import './page.css';
 import { MainCol, MainRow, MountNode } from './styled';
 import {
-  displayError,
-  loadJsForceUmd,
-  loadJs,
-  loadCss,
-  appendJs,
   appendCss,
+  appendHtml,
+  appendJs,
+  displayError,
+  loadCss,
+  loadJs,
+  loadJsForceUmd,
 } from './util';
 
 Object.assign(window, {
@@ -52,6 +53,7 @@ Object.assign(window, {
   loadCss,
   appendJs,
   appendCss,
+  appendHtml,
   setRendering: _.noop, // noop placeholder
 });
 

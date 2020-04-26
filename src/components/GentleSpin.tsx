@@ -21,6 +21,9 @@ let useGentle: UseGentle = _value => {
     } else {
       debouncedSetValue(_value);
     }
+    return () => {
+      debouncedSetValue.cancel();
+    };
   }, [_value, debouncedSetValue]);
 
   return value;

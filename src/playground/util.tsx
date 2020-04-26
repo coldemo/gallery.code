@@ -1,7 +1,7 @@
+import Axios from 'axios';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { ErrorInfo } from './styled';
-import Axios from 'axios';
 
 export let displayError = (err: Error) => {
   let mountNode = document.querySelector('#mountNode');
@@ -85,4 +85,8 @@ export let appendCss = (code: string) => {
   let el = document.createElement('style');
   el.innerHTML = code;
   window.assetsNode.appendChild(el);
+};
+
+export let appendHtml = (code: string) => {
+  window.mountNode.innerHTML += code;
 };
