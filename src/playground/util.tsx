@@ -75,6 +75,7 @@ export let loadCss = (url: string | string[]): Promise<void> => {
   });
 };
 
+// todo error-handling
 export let appendJs = (code: string) => {
   let el = document.createElement('script');
   el.innerHTML = code;
