@@ -4,6 +4,7 @@ import 'codemirror/lib/codemirror.css';
 // import 'codemirror/mode/javascript/javascript';
 import 'codemirror/mode/jsx/jsx';
 import 'codemirror/mode/python/python';
+import 'codemirror/mode/vue/vue';
 import 'codemirror/theme/material.css';
 import immer from 'immer';
 import _ from 'lodash';
@@ -62,6 +63,7 @@ Object.assign(window, {
 export let Playground: React.FC = () => {
   let history = useHistory();
   let { file } = useParams() as { file: string };
+  let isVue = file.endsWith('.vue');
   let isPy = file.endsWith('.py');
 
   // let initialCode = useMemo(() => {
@@ -225,7 +227,7 @@ export let Playground: React.FC = () => {
             <CodeMirror
               className="main-editor"
               options={{
-                mode: isPy ? 'python' : 'text/typescript-jsx',
+                mode: isVue ? 'vue' : isPy ? 'python' : 'text/typescript-jsx',
                 theme: 'material',
                 lineNumbers: true,
               }}
