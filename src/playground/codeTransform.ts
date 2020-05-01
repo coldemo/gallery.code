@@ -32,12 +32,13 @@ export let wrapVue = (code: string) => {
   return `
 (async () => {
   let removeLoading = addLoading()
-
-  let a0 = assetsNode
-  a0.id = 'assetsNodeOutdated'
-  let a1 = document.createElement('div')
-  a1.id = 'assetsNode'
-  a0.parentNode.appendChild(a1)
+  {
+    let a0 = assetsNode
+    a0.id = 'assetsNodeOutdated'
+    let a1 = document.createElement('div')
+    a1.id = 'assetsNode'
+    a0.parentNode.appendChild(a1)
+  }
 
   ReactDOM.unmountComponentAtNode(mountNode)
   mountNode.innerHTML = '' // put behind, otherwise can cause error in react
@@ -59,8 +60,10 @@ export let wrapVue = (code: string) => {
     }
     let curr = mountNode.children[0]
     new Vue(App).$mount(curr)
-
-    a0.parentNode.removeChild(a0)
+    {
+      let a0 = assetsNodeOutdated
+      a0.parentNode.removeChild(a0)
+    }
   } catch (err) {
     console.error(['displayError', err])
     displayError(err)
@@ -75,12 +78,13 @@ export let wrapPy = (code: string) => {
   return `
 (async () => {
   let removeLoading = addLoading()
-
-  let a0 = assetsNode
-  a0.id = 'assetsNodeOutdated'
-  let a1 = document.createElement('div')
-  a1.id = 'assetsNode'
-  a0.parentNode.appendChild(a1)
+  {
+    let a0 = assetsNode
+    a0.id = 'assetsNodeOutdated'
+    let a1 = document.createElement('div')
+    a1.id = 'assetsNode'
+    a0.parentNode.appendChild(a1)
+  }
 
   ReactDOM.unmountComponentAtNode(mountNode)
   mountNode.innerHTML = '' // put behind, otherwise can cause error in react
@@ -128,7 +132,10 @@ export let wrapPy = (code: string) => {
       h('pre', { key: 1, id: 'py-output' }),
       h('div', { key: 2, id: 'py-canvas' }),
     ]), mountNode)
-    a0.parentNode.removeChild(a0)
+    {
+      let a0 = assetsNodeOutdated
+      a0.parentNode.removeChild(a0)
+    }
   } catch (err) {
     console.error(['displayError', err])
     displayError(err)
@@ -143,12 +150,13 @@ export let wrapJs = (code: string) => {
   return `
 (async () => {
   let removeLoading = addLoading()
-
-  let a0 = assetsNode
-  a0.id = 'assetsNodeOutdated'
-  let a1 = document.createElement('div')
-  a1.id = 'assetsNode'
-  a0.parentNode.appendChild(a1)
+  {
+    let a0 = assetsNode
+    a0.id = 'assetsNodeOutdated'
+    let a1 = document.createElement('div')
+    a1.id = 'assetsNode'
+    a0.parentNode.appendChild(a1)
+  }
 
   ReactDOM.unmountComponentAtNode(mountNode)
   mountNode.innerHTML = '' // put behind, otherwise can cause error in react
@@ -171,7 +179,10 @@ export let wrapJs = (code: string) => {
         ReactDOM.render(React.createElement(App), mountNode)
       }
     }
-    a0.parentNode.removeChild(a0)
+    {
+      let a0 = assetsNodeOutdated
+      a0.parentNode.removeChild(a0)
+    }
   } catch (err) {
     console.error(['displayError', err])
     displayError(err)
