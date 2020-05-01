@@ -126,10 +126,15 @@ export let Playground: React.FC = () => {
 
   let [preview, setPreview] = useState('');
   let [compiling, setCompiling] = useState(false);
-  let [rendering, setRendering] = useState(false);
-  let previewLoading = preloading || compiling || rendering;
+  let [rendering, _setRendering] = useState(0);
+  let previewLoading = preloading || compiling || rendering > 0;
 
-  Object.assign(window, { setRendering }); // without side-effect
+  let addLoading = useCallback(() => {
+    _setRendering(s => s + 1);
+    return () => _setRendering(s => s - 1);
+  }, []);
+
+  Object.assign(window, { addLoading }); // without side-effect
 
   let doPreview = useCallback(
     async (code: string) => {

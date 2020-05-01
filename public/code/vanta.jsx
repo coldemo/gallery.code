@@ -45,7 +45,7 @@ let VantaHeader = ({ theme }) => {
 
 let loadVantaEffect = (el, theme) => {
   let promise = (async () => {
-    setRendering(true)
+    let removeLoading = addLoading()
     if (['halo', 'topology'].includes(theme)) {
       await loadJs('https://unpkg.com/vanta@0.5.15/vendor/p5.min.js')
     }
@@ -56,7 +56,7 @@ let loadVantaEffect = (el, theme) => {
     let ret = VANTA[method]({ el })
     let canvasHeight = el.querySelector('canvas').clientHeight
     el.style.height = `${canvasHeight}px`
-    setRendering(false)
+    removeLoading()
     return ret
   })()
   return () => {

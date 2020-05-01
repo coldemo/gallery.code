@@ -60,7 +60,12 @@ let ToDoStore = Collection.extend({
   init: function() {
     this.clearCompleted = this.clearCompleted.bind(this);
     this.add = this.add.bind(this);
-    this.reset(JSON.parse(localStorage.getItem(storageKey)));
+    let storedTodos = JSON.parse(localStorage.getItem(storageKey));
+    if (Array.isArray(storedTodos) && storedTodos.length) {
+      this.reset(storedTodos);
+    } else {
+      localStorage.removeItem(storageKey);
+    }
     this.addListener('change', this.save.bind(this));
   },
   add: function(txt) {
@@ -179,7 +184,9 @@ let App = Controller.extend({
 });
 
 var store = new ToDoStore([
-  // { id: 0, text: 'write todomvc', done: false },
+  { id: 0, text: 'respect to espresso.js', done: false },
+  { id: 1, text: 'espresso.js 520 stars including mine', done: false },
+  { id: 2, text: 'it\'s outdated but was in my early memory', done: false },
 ]);
 
 new App({ view: document.getElementById('todoapp') });

@@ -31,7 +31,7 @@ export let wrapVue = (code: string) => {
 
   return `
 (async () => {
-  setRendering(true)
+  let removeLoading = addLoading()
 
   let a0 = assetsNode
   a0.id = 'assetsNodeOutdated'
@@ -65,7 +65,7 @@ export let wrapVue = (code: string) => {
     console.error(['displayError', err])
     displayError(err)
   } finally {
-    setRendering(false)
+    removeLoading()
   }
 })()
   `.trim();
@@ -74,7 +74,7 @@ export let wrapVue = (code: string) => {
 export let wrapPy = (code: string) => {
   return `
 (async () => {
-  setRendering(true)
+  let removeLoading = addLoading()
 
   let a0 = assetsNode
   a0.id = 'assetsNodeOutdated'
@@ -133,7 +133,7 @@ export let wrapPy = (code: string) => {
     console.error(['displayError', err])
     displayError(err)
   } finally {
-    setRendering(false)
+    removeLoading()
   }
 })()
   `.trim();
@@ -142,7 +142,7 @@ export let wrapPy = (code: string) => {
 export let wrapJs = (code: string) => {
   return `
 (async () => {
-  setRendering(true)
+  let removeLoading = addLoading()
 
   let a0 = assetsNode
   a0.id = 'assetsNodeOutdated'
@@ -176,7 +176,7 @@ export let wrapJs = (code: string) => {
     console.error(['displayError', err])
     displayError(err)
   } finally {
-    setRendering(false)
+    removeLoading()
   }
 })()
   `.trim();
