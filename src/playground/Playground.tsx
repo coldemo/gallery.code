@@ -3,6 +3,7 @@ import Axios from 'axios';
 import 'codemirror/lib/codemirror.css';
 // import 'codemirror/mode/javascript/javascript';
 import 'codemirror/mode/jsx/jsx';
+import 'codemirror/mode/markdown/markdown';
 import 'codemirror/mode/python/python';
 import 'codemirror/mode/vue/vue';
 import 'codemirror/theme/material.css';
@@ -65,6 +66,7 @@ export let Playground: React.FC = () => {
   let { file } = useParams() as { file: string };
   let isVue = file.endsWith('.vue');
   let isPy = file.endsWith('.py');
+  let isMd = file.endsWith('.md');
 
   // let initialCode = useMemo(() => {
   //   return localStorage.getItem(storeKeyCode) || _initialCode;
@@ -142,6 +144,7 @@ export let Playground: React.FC = () => {
       setCompiling(true);
       try {
         let res = await codeTransform(code, file);
+        // console.log('res', res);
         setPreview(res);
       } catch (err) {
         displayError(err);
@@ -232,7 +235,13 @@ export let Playground: React.FC = () => {
             <CodeMirror
               className="main-editor"
               options={{
-                mode: isVue ? 'vue' : isPy ? 'python' : 'text/typescript-jsx',
+                mode: isMd
+                  ? 'markdown'
+                  : isVue
+                  ? 'vue'
+                  : isPy
+                  ? 'python'
+                  : 'text/typescript-jsx',
                 theme: 'material',
                 lineNumbers: true,
               }}

@@ -1,8 +1,10 @@
 import { babelTransform } from './babelMaster';
 
 export let codeTransform = async (code: string, file: string) => {
+  let isMd = file.endsWith('.md');
   let isPy = file.endsWith('.py');
   let isVue = file.endsWith('.vue');
+  if (isMd) return wrapMd(code);
   if (isPy) return wrapPy(code);
   if (isVue) return wrapVue(code);
 
@@ -60,6 +62,79 @@ export let wrapVue = (code: string) => {
     }
     let curr = mountNode.children[0]
     new Vue(App).$mount(curr)
+    {
+      let a0 = assetsNodeOutdated
+      a0.parentNode.removeChild(a0)
+    }
+  } catch (err) {
+    console.error(['displayError', err])
+    displayError(err)
+  } finally {
+    removeLoading()
+  }
+})()
+  `.trim();
+};
+
+export let wrapMd = (code: string) => {
+  return `
+(async () => {
+  let removeLoading = addLoading()
+  {
+    let a0 = assetsNode
+    a0.id = 'assetsNodeOutdated'
+    let a1 = document.createElement('div')
+    a1.id = 'assetsNode'
+    a0.parentNode.appendChild(a1)
+  }
+
+  ReactDOM.unmountComponentAtNode(mountNode)
+  mountNode.innerHTML = '' // put behind, otherwise can cause error in react
+
+  try {
+    await loadJs('https://unpkg.com/vditor@3.2.0/dist/method.min.js')
+    await loadCss('https://unpkg.com/vditor@3.2.0/dist/index.css')
+
+    appendCss(\`
+    #mdPreview { padding: 16px 16px 32px }
+    #mdPreview > *:first-child { margin-top: 0 !important }
+    .vditor-speech { left: 2px !important }
+    \`)
+
+    appendHtml(\`
+    <div id="mdPreview"></div>
+    \`)
+
+    // Code from https://markdown.lovejade.cn/
+    // let onloadCallback = oEvent => {}
+
+    // Code from https://github.com/Vanessa219/vditor/blob/master/demo/static-preview.html
+    await Vditor.preview(mdPreview, ${JSON.stringify(code)}, {
+      markdown: { toc: true },
+      speech: { enable: true },
+      anchor: true,
+      // after () {
+      //   Vditor.outlineRender(mdPreview, document.getElementById('outline'))
+      // },
+      lazyLoadImage: 'https://cdn.jsdelivr.net/npm/vditor/dist/images/img-loading.svg',
+      renderers: {
+        renderHeading: (node, entering) => {
+          if (entering) {
+            const id = Lute.GetHeadingID(node)
+            return [
+              \`<h\${node.__internal_object__.HeadingLevel} class="vditor__heading">
+<a id="vditorAnchor-\${id}" class="vditor-anchor" href="javascript:void 0"></a>
+<span class="prefix"></span><span>\`,
+              Lute.WalkContinue]
+          } else {
+            return [\`</span></h\${
+              node.__internal_object__.HeadingLevel
+            }>\`, Lute.WalkContinue]
+          }
+        },
+      },
+    })
+
     {
       let a0 = assetsNodeOutdated
       a0.parentNode.removeChild(a0)
