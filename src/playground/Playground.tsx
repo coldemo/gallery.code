@@ -26,6 +26,7 @@ import { useModel } from '../hooks/useModel';
 import { useTrigger } from '../hooks/useTrigger';
 import { codeTransform } from './codeTransform';
 import './page.css';
+import './print.css';
 import { MainCol, MainRow, MountNode } from './styled';
 import {
   appendCss,
@@ -212,6 +213,7 @@ export let Playground: React.FC = () => {
           </GentleSpin>
         </MainCol>
         <DragSizing
+          className="editor-area"
           onUpdate={handleSizingUpdate}
           {...(isGreaterThanMedium
             ? {

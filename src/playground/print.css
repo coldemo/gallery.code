@@ -1,0 +1,26 @@
+@media print {
+  html {
+    overflow: visible !important;
+    height: auto;
+  }
+
+  #mountNode {
+    height: auto;
+    overflow-y: visible;
+  }
+
+  .editor-area {
+    display: none;
+  }
+
+  #mdPreview .cols {
+    page-break-before: auto;
+    page-break-after: auto;
+    page-break-inside: avoid;
+  }
+  #mdPreview img {
+    page-break-before: auto;
+    page-break-after: auto;
+    page-break-inside: avoid;
+  }
+}

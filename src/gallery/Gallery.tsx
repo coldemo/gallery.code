@@ -1,10 +1,10 @@
 import { Card, Col, Row, Spin } from 'antd';
 import React, { useEffect } from 'react';
+import Helmet from 'react-helmet';
 import { useHistory } from 'react-router';
 import { useApi } from '../hooks/useApi';
 import './page.css';
 import { handleImageError } from './util';
-import Helmet from 'react-helmet';
 
 export let Gallery: React.FC = () => {
   let history = useHistory();
@@ -17,6 +17,7 @@ export let Gallery: React.FC = () => {
     let txt = resp.data;
     let list = txt
       .split(/\n/)
+      .map(s => s.replace(/#.*/, '').trim())
       .filter(Boolean)
       .map(v => v.replace(/^-\s*/, ''));
     return list;
