@@ -65,6 +65,8 @@ Object.assign(window, {
 export let Playground: React.FC = () => {
   let history = useHistory();
   let { file } = useParams() as { file: string };
+  file = file || '';
+
   let isVue = file.endsWith('.vue');
   let isPy = file.endsWith('.py');
   let isMd = file.endsWith('.md');
@@ -76,40 +78,20 @@ export let Playground: React.FC = () => {
   let codeBinding = useFormBinding(initialCode, (editor, data, value) => value);
 
   let {
-    request: reqIndex,
-    response: respIndex,
-    loading: loadingIndex,
-  } = useApi<string>('GET', 'code/index.yml');
-  let {
     request: reqCode,
     error: errReqCode,
     response: respCode,
     loading: loadingCode,
   } = useApi<string>('GET', 'code/:file');
-  let preloading = loadingIndex || loadingCode;
 
   useEffect(() => {
     if (file) {
       reqCode({ pathParams: { file } });
     } else {
-      reqIndex();
+      history.push('/');
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [file]);
-
-  useEffect(() => {
-    if (respIndex == null) return;
-    let txt = respIndex.data;
-    let list = txt
-      .split(/\n/)
-      .map(s => s.replace(/#.*/, '').trim())
-      .filter(Boolean)
-      .map(v => v.replace(/^-\s*/, ''));
-    let defaults = list[0];
-    // reqCode({ pathParams: { file: file || defaults } });
-    history.push(`/playground/${file || defaults}`);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [file, respIndex]);
 
   useEffect(() => {
     if (respCode == null) return;
@@ -130,7 +112,7 @@ export let Playground: React.FC = () => {
   let [preview, setPreview] = useState('');
   let [compiling, setCompiling] = useState(false);
   let [rendering, _setRendering] = useState(0);
-  let previewLoading = preloading || compiling || rendering > 0;
+  let previewLoading = loadingCode || compiling || rendering > 0;
 
   let addLoading = useCallback(() => {
     _setRendering(s => s + 1);
