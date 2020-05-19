@@ -1,16 +1,6 @@
 ### XX的简历-前端-深圳
 
-<style>
-table, tbody { width: 100% }
-.hide-th table th { display: none }
-.meta-table tr td:nth-child(1), .meta-table tr td:nth-child(3) { font-weight: bold }
-.cols { max-width: 620px; font-size: 0; display: flex; justify-content: space-between }
-.cols-2 * { width: 49% }
-.cols-3 * { width: 31% }
-.cols-4 * { width: 23% }
-</style>
-
-<small>
+<!-- Cmd(Ctrl)+P -> 打印 -> 可导出 PDF格式 -->
 
 <div class="hide-th meta-table">
 
@@ -120,4 +110,16 @@ table, tbody { width: 100% }
 <img src="https://fritx.me/resume/WechatIMG7.jpeg">
 </div>
 
-</small>
+<style>
+@media screen (max-width: 540px) {
+  #mdPreview { font-size: 80% }
+}
+.vditor-reset h1, .vditor-reset h2 { border: none }
+table, tbody { width: 100% }
+.hide-th table th { display: none }
+.meta-table tr td:nth-child(1), .meta-table tr td:nth-child(3) { font-weight: bold }
+.cols { max-width: 620px; font-size: 0; display: flex; justify-content: space-between }
+.cols-2 * { width: 49% }
+.cols-3 * { width: 31% }
+.cols-4 * { width: 23% }
+</style>

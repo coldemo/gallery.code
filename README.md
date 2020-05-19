@@ -10,6 +10,8 @@ Visit: https://coldemo.github.io/
 - [ ] faked location/window, cookie/storage partition, markdown anchor
 - [ ] tag-filter/btn-back/reset/export/upload/fullscreen/popstate
 - [ ] lang rb/go/java/dart/kotlin, mjs-import/vite
+- [ ] dat.gui, btn-print/export
+- [x] resume.md, print.css
 - [x] crank-jsx, vue-jsx, ts/tsx, py, vue, md, add/removeRendering
 - [x] error-handling, assetsNode, load-parallel
 - [x] gh-pages, lang js/jsx, react/vue, umd-hack
