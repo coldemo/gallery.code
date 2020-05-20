@@ -6,6 +6,7 @@
     ".npmrc": "dotenv",
   },
   "editor.codeActionsOnSave": {
+    "source.organizeImports": true,
     "source.fixAll.eslint": true
   }
 }
