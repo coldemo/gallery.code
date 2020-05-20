@@ -111,7 +111,7 @@
 </div>
 
 <style>
-@media screen (max-width: 540px) {
+@media screen and (max-width: 540px) {
   #mdPreview { font-size: 80% }
 }
 .vditor-reset h1, .vditor-reset h2 { border: none }
