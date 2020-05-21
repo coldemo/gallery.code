@@ -8,6 +8,8 @@ on:
     branches: [master]
   pull_request:
     branches: [master]
+  repository_dispatch:
+    types: trigger-build
 
 jobs:
   build:
@@ -24,4 +26,6 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - run: npm install
-      - run: npm run deploy
+      - run: npm run build
+      - run: echo coldemo.js.org > build/CNAME
+      - run: npx gh-pages -d ./build -b master -r "https://${{ secrets.ACCESS_TOKEN }}@github.com/coldemo/coldemo.github.io.git" -u "gh-pages <noreply@github.com>"
