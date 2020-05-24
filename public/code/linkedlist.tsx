@@ -72,7 +72,7 @@ let sections = [
   // 206. 反转链表
   () => {
     function reverseLinkedList<T>(head: ListNode<T>): ListNode<T> {
-      head = _.cloneDeep(head)
+      head = _.cloneDeep(head) // avoid mutating original
       let prev = null
       let curr = head
       while (curr) {
@@ -88,6 +88,44 @@ let sections = [
     return (
       <section>
         <h4>206. 反转链表</h4>
+        <div>{stringifyLinkedList(before)}</div>
+        <div>Reverse: {stringifyLinkedList(after)}</div>
+      </section>
+    )
+  },
+
+  // 92. 反转链表 II
+  () => {
+    function reverseLinkedList<T>(head: ListNode<T>, m: number, n: number): ListNode<T> {
+      head = _.cloneDeep(head)
+      let start = head
+      let curr = head
+      let beforeStart = null
+      let id = 1
+      while (id < m) {
+        let next = curr.next
+        beforeStart = curr
+        curr = next
+        id++
+      }
+      let afterEnd = curr
+      let prev = null
+      while (id <= n) {
+        let next = curr.next
+        curr.next = prev
+        prev = curr
+        curr = next
+        id++
+      }
+      beforeStart.next = prev
+      afterEnd.next = curr
+      return start
+    }
+    let before = createLinkedList([1, 2, 3, 4, 5, 6, 7])
+    let after = reverseLinkedList(before, 3, 6)
+    return (
+      <section>
+        <h4>92. 反转链表 II</h4>
         <div>{stringifyLinkedList(before)}</div>
         <div>Reverse: {stringifyLinkedList(after)}</div>
       </section>
