@@ -64,7 +64,7 @@ export let wrapVue = (code: string) => {
     new Vue(App).$mount(curr)
     {
       let a0 = assetsNodeOutdated
-      a0.parentNode.removeChild(a0)
+      if (a0.parentNode) a0.parentNode.removeChild(a0)
     }
   } catch (err) {
     console.error(['displayError', err])
@@ -137,7 +137,7 @@ export let wrapMd = (code: string) => {
 
     {
       let a0 = assetsNodeOutdated
-      a0.parentNode.removeChild(a0)
+      if (a0.parentNode) a0.parentNode.removeChild(a0)
     }
   } catch (err) {
     console.error(['displayError', err])
@@ -209,7 +209,7 @@ export let wrapPy = (code: string) => {
     ]), mountNode)
     {
       let a0 = assetsNodeOutdated
-      a0.parentNode.removeChild(a0)
+      if (a0.parentNode) a0.parentNode.removeChild(a0)
     }
   } catch (err) {
     console.error(['displayError', err])
@@ -256,7 +256,7 @@ export let wrapJs = (code: string) => {
     }
     {
       let a0 = assetsNodeOutdated
-      a0.parentNode.removeChild(a0)
+      if (a0.parentNode) a0.parentNode.removeChild(a0)
     }
   } catch (err) {
     console.error(['displayError', err])
