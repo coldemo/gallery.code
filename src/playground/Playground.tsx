@@ -36,6 +36,7 @@ import {
   loadCss,
   loadJs,
   loadJsForceUmd,
+  sleep,
 } from './util';
 
 Object.assign(window, {
@@ -50,6 +51,7 @@ Object.assign(window, {
   Antd,
   React,
   ReactDOM,
+  sleep,
   displayError,
   loadJsForceUmd,
   loadJs,

@@ -8,6 +8,41 @@ export let codeTransform = async (code: string, file: string) => {
   if (isPy) return wrapPy(code);
   if (isVue) return wrapVue(code);
 
+  if (/\.csl\.([tj]sx?)$/.test(file)) {
+    file = file.replace(/(\.[tj]s)$/, '$1x');
+    code = `
+      let main = async (console) => {
+        ;;${code};;
+      }
+      let App = () => {
+        let [logs, dispatchLogs] = useReducer((state, action) => {
+          if (action.type === 'append') return [...state, action.content]
+          return state
+        }, [])
+        useEffect(() => {
+          let myLog = (...args) => {
+            dispatchLogs({ type: 'append', content: JSON.stringify(args) })
+          }
+          let originalConsole = console
+          let mockConsole = new Proxy(originalConsole, {
+            get: (t, k) => {
+              if (k === 'log') return myLog
+              return t[k]
+            }
+          })
+          main(mockConsole)
+        }, [])
+        return (
+          <ul style={{ margin: '20px 0' }}>
+            {logs.map((v, i) => {
+              return <li key={i}>{v}</li>
+            })}
+          </ul>
+        )
+      }
+    `;
+  }
+
   code = wrapJs(code);
   let hasJsx = file && ['.jsx', '.tsx'].some(ext => file.endsWith(ext));
   let hasTs = file && ['.ts', '.tsx'].some(ext => file.endsWith(ext));

@@ -3,6 +3,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { ErrorInfo } from './styled';
 
+export let sleep = (delay: number) => {
+  return new Promise(resolve => {
+    setTimeout(resolve, delay);
+  });
+};
+
 export let displayError = (err: Error) => {
   let mountNode = document.querySelector('#mountNode');
   ReactDOM.render(<ErrorInfo>{err.stack}</ErrorInfo>, mountNode);
