@@ -1,4 +1,5 @@
 import Axios from 'axios';
+import _ from 'lodash';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { ErrorInfo } from './styled';
@@ -11,7 +12,10 @@ export let sleep = (delay: number) => {
 
 export let displayError = (err: Error) => {
   let mountNode = document.querySelector('#mountNode');
-  ReactDOM.render(<ErrorInfo>{err.stack}</ErrorInfo>, mountNode);
+  let errMsg = (err && err.stack) || String(err);
+  let skulptErrInfo = _.get(err, 'args.v');
+  if (skulptErrInfo) errMsg += '\n' + JSON.stringify(skulptErrInfo);
+  ReactDOM.render(<ErrorInfo>{errMsg}</ErrorInfo>, mountNode);
 };
 
 export let loadJsForceUmd = async ({

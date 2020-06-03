@@ -25,12 +25,13 @@ appendCss(`
   padding: 20px;
 }
 .grids {
+  margin: 0 auto;
+  max-width: 300px;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
 }
 .grids > div {
-  width: 33%;
   border: solid 1px gray;
   display: flex;
   align-items: center;
@@ -48,9 +49,10 @@ let myGrids = document.createElement('div')
 myGrids.id = 'myGrids'
 myGrids.className = 'grids'
 
+let cols = 3
 let arr: string[] = []
-for (let i = 0; i < 3; i++) {
-  for (let j = 0; j < 3; j++) {
+for (let i = 0; i < cols; i++) {
+  for (let j = 0; j < cols; j++) {
     arr.push(`${i}${String.fromCharCode(65+j)}`)
   }
 }
@@ -58,6 +60,7 @@ for (let i = 0; i < 3; i++) {
 arr.forEach(val => {
   let div = document.createElement('div')
   div.textContent = val
+  div.style.width = `${100 / cols}%`
   myGrids.appendChild(div)
 })
 document.querySelector('#mountNode').appendChild(myGrids)

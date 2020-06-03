@@ -207,6 +207,7 @@ export let wrapPy = (code: string) => {
 
     appendCss(\`
     #py-container { padding: 20px }
+    #py-output { white-space: pre-line }
     #py-canvas { transform: scale(0.7); transform-origin: top center; }
     \`)
 
@@ -233,7 +234,7 @@ export let wrapPy = (code: string) => {
         console.log('success');
       }, function(err) {
         console.error(['displayError', err])
-        displayError(String(err))
+        displayError(err)
       });
     }, 0)
 
