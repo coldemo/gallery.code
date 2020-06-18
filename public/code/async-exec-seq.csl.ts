@@ -1,3 +1,8 @@
+// 浏览器与Node的事件循环(Event Loop)有何区别?
+// https://blog.csdn.net/Fundebug/article/details/86487117
+// 关于async/await、promise和setTimeout执行顺序
+// https://blog.csdn.net/yun_hou/article/details/88697954
+
 // 1.
 console.log('---------- 1. ----------')
 async function async1() {

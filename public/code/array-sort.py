@@ -1,20 +1,18 @@
-# 十大经典排序算法（python实现）（原创）
-# https://www.cnblogs.com/Mufasa/p/10527387.html
-
 sample = [2, 15, 5, 9, 7, 6, 4, 12, 5, 4, 1, 64, 5, 6, 4, 2, 3, 54, 45, 4, 44]
-sample_sorted = [1, 2, 2, 3, 4, 4, 4, 4, 5, 5, 5, 6, 6, 7, 9, 12, 15, 44, 45, 54, 64]    # 正确排序
+sample_sorted = [1, 2, 2, 3, 4, 4, 4, 4, 5, 5, 5,
+                 6, 6, 7, 9, 12, 15, 44, 45, 54, 64]    # 正确排序
 
 print(sample)
 print(sample_sorted)
 
+
 def assert_list(actual, expected):
-    len1 = len(actual)
-    len2 = len(expected)
-    if len1 == len2:
-        for i in range(max(len1, len2)):
-            if actual[i] != expected[i]: return actual
-        return 'OK'
-    return actual
+    return 'OK' if actual == expected else actual
+
+
+# 十大经典排序算法（python实现）（原创）
+# https://www.cnblogs.com/Mufasa/p/10527387.html
+
 
 def bubble_sort(lst):
     while 1:
@@ -26,9 +24,11 @@ def bubble_sort(lst):
         if not touched:    # 如果没有数值交换，那么就跳出
             break
 
+
 dt = sample[:]
 bubble_sort(dt)
 print('bubble_sort: ' + str(assert_list(dt, sample_sorted)))
+
 
 def selection_sort(lst):
     d1 = []
@@ -41,8 +41,10 @@ def selection_sort(lst):
         d1.append(min[1])    # 在新数组中添加
     return d1
 
+
 dt = selection_sort(sample[:])
 print('selection_sort: ' + str(assert_list(dt, sample_sorted)))
+
 
 def direct_insertion_sort(lst):   # 直接插入排序，因为要用到后面的希尔排序，所以转成function
     d1 = [lst[0]]
@@ -57,10 +59,12 @@ def direct_insertion_sort(lst):   # 直接插入排序，因为要用到后面�
             d1.insert(0, i)
     return d1
 
+
 dt = direct_insertion_sort(sample[:])
 print('direct_insertion_sort: ' + str(assert_list(dt, sample_sorted)))
 
-def binary_insertion_sort(lst):  # 基于 direct_insertion_sort
+
+def binary_insertion_sort(lst):
     d1 = [lst[0]]
     for i in lst[1:]:
         index_now = [-1, len(d1)]
@@ -78,9 +82,12 @@ def binary_insertion_sort(lst):  # 基于 direct_insertion_sort
                 index_now[1] = index
     return d1
 
+
 dt = binary_insertion_sort(sample[:])
 print('binary_insertion_sort: ' + str(assert_list(dt, sample_sorted)))
 
+
+# 基于 direct_insertion_sort
 def shell_sort(d):  # d 为乱序数组，l为初始增量,其中l<len(d),取为len(d)/2比较好操作。最后还是直接省略length输入
     length = int(len(d) / 2)  # 10
     num = int(len(d) / length)  # 2
@@ -94,13 +101,14 @@ def shell_sort(d):  # d 为乱序数组，l为初始增量,其中l<len(d),取为
                 d[i + j * length] = d_mid[j]
         length = int(length / 2)
         if length == 0:
-            return d
             break
         num = int(len(d) / length)
+
 
 dt = sample[:]
 shell_sort(dt)
 print('shell_sort: ' + str(assert_list(dt, sample_sorted)))
+
 
 def merge_sort(lst):  # 分治发的典型应用，大问题拆分成小问题，逐个击破，之后将结果合并
     half_index = int(len(lst) / 2)  # 将数组拆分
@@ -126,8 +134,10 @@ def merge_sort(lst):  # 分治发的典型应用，大问题拆分成小问题�
             break
     return d0
 
+
 dt = merge_sort(sample[:])
 print('merge_sort: ' + str(assert_list(dt, sample_sorted)))
+
 
 def quick_sort(lst):
     d = [[], [], []]
@@ -140,7 +150,6 @@ def quick_sort(lst):
         else:  # 等于基准值的放在中间
             d[1].append(i)
 
-    # print(d[0], d[1], d[2])
     if len(d[0]) > 1:  # 大于基准值的子数组，递归
         d[0] = quick_sort(d[0])
     if len(d[2]) > 1:  # 小于基准值的子数组，递归
@@ -150,16 +159,18 @@ def quick_sort(lst):
     d[0].extend(d[2])
     return d[0]
 
+
 dt = quick_sort(sample[:])
 print('quick_sort: ' + str(assert_list(dt, sample_sorted)))
+
 
 def counting_sort(lst):
     d_max = 0
     d_min = 0
     for i in lst:
-        if d_max<i:
+        if d_max < i:
             d_max = i
-        if d_min>i:
+        if d_min > i:
             d_min = i
 
     d1 = {}
@@ -170,24 +181,26 @@ def counting_sort(lst):
             d1[i] = 1
 
     d2 = []
-    for i in range(d_min,d_max+1):
+    for i in range(d_min, d_max+1):
         if i in d1.keys():
             for j in range(d1[i]):
                 d2.append(i)
     return d2
 
+
 dt = counting_sort(sample[:])
 print('counting_sort: ' + str(assert_list(dt, sample_sorted)))
+
 
 def bucket_sort(lst):
     d1 = [[] for x in range(10)]
     for i in lst:
-        d1[int(i/10)].append(i)
+        d1[int(i / 10)].append(i)
     for i in range(len(d1)):
         if d1[i] != []:
             d2 = [[] for x in range(10)]
             for j in d1[i]:
-                d2[j%10].append(j)
+                d2[j % 10].append(j)
             d1[i] = d2
     d3 = []
     for i in d1:
@@ -199,12 +212,13 @@ def bucket_sort(lst):
                             d3.append(k)
     return d3
 
+
 dt = bucket_sort(sample[:])
 print('bucket_sort: ' + str(assert_list(dt, sample_sorted)))
 
+
 def radix_sort(lst):
     d1 = [[] for x in range(10)]
-
     # 第一次 最小位次排序
     for i in lst:
         d1[i % 10].append(i)
@@ -213,11 +227,10 @@ def radix_sort(lst):
         if i:
             for j in i:
                 d0_1.append(j)
-
     # 第二次 次低位排序
     d2 = [[] for x in range(10)]
     for i in d0_1:
-        d2[int(i/10)].append(i)
+        d2[int(i / 10)].append(i)
     d0_2 = []
     for i in d2:
         if i:
@@ -225,11 +238,14 @@ def radix_sort(lst):
                 d0_2.append(j)
     return d0_2
 
+
 dt = radix_sort(sample[:])
 print('radix_sort: ' + str(assert_list(dt, sample_sorted)))
 
+
 # Python 堆排序 - 菜鸟教程
 # https://www.runoob.com/python3/python-heap-sort.html
+
 
 def heapify(arr, n, i):
     largest = i
@@ -240,8 +256,9 @@ def heapify(arr, n, i):
     if r < n and arr[largest] < arr[r]:
         largest = r
     if largest != i:
-        arr[i],arr[largest] = arr[largest],arr[i]  # 交换
+        arr[i], arr[largest] = arr[largest], arr[i]  # 交换
         heapify(arr, n, largest)
+
 
 def heap_sort(arr):
     n = len(arr)
@@ -252,6 +269,7 @@ def heap_sort(arr):
     for i in range(n-1, 0, -1):
         arr[i], arr[0] = arr[0], arr[i]   # 交换
         heapify(arr, i, 0)
+
 
 dt = sample[:]
 heap_sort(dt)
